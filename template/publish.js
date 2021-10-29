@@ -45,6 +45,43 @@ function publish(taffyData, options, tutorials) {
   // Augment data with needed informations
   context.data().each(registerLink);
 
+  // # Data Preparation
+  // ## Modules & Class
+  // - Remove duplicate on exports
+  _.each(
+    _.groupBy(helper.find(context.data, {}), (item) => item.kind + ':~:' + item.longname),
+    (item) => {
+      if (item.length > 1) {
+        item.forEach((doclet) => {
+          if (doclet.meta.code.name.indexOf('exports.') !== 0) {
+            doclet.scope = 'package';
+            doclet.shadow = true;
+          }
+        })
+      }
+    }
+  );
+  // - Normalize Constructor
+  _.each(helper.find(context.data, {kind: 'class', scope: 'instance'}), (doclet) => {
+    doclet.kind = 'function';
+    doclet.name = 'constructor';
+  });
+  // - Remove inner items
+  _.each(helper.find(context.data, {kind: ['constant', 'member'], scope: 'inner', memberof: {left: 'module:'}}), (doclet) => {
+    doclet.hidden = true;
+  });
+  // - Remove exported members (may be duplicates)
+  _.each(helper.find(context.data, {kind: ['constant', 'member'], scope: 'static', memberof: {left: 'module:'}}), (doclet) => {
+    doclet.hidden = true;
+  });
+
+  // ## Function
+  // - Remove Destructure "Member"
+  _.each(helper.find(context.data, {kind: 'member', scope: 'inner', longname: {like: '~'}, meta: {has: [{code: {type: 'Literal'}}, {code: {type: 'MemberExpression'}}]}}), (doclet) => {
+    doclet.hidden = true;
+  });
+
+  // - Improve Function Signature
   _.each(helper.find(context.data, {kind: 'function'}), improveFunc);
   _.each(helper.find(context.data, {kind: 'member'}), improveFunc);
 
@@ -95,6 +132,7 @@ function publish(taffyData, options, tutorials) {
   actions.push(generate(
     'conf.py', require('./view-models/sphinx-config')));
   var docletModel = require('./view-models/doclet');
+
   context.data().each(function(doclet) {
     var url = helper.longnameToUrl[doclet.longname];
     if (url.indexOf('#') !== -1) {

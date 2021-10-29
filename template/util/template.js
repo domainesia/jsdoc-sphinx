@@ -35,7 +35,7 @@ function docletChildren(context, doclet, kinds) {
     if (doclet) {
       q.longname = { "!is": doclet.longname };
     }
-    results[k] = helper.find(context.data, q);
+    results[k] = _.filter(helper.find(context.data, q), (item) => !item.hidden && !item.shadow);
   });
   logger.debug((doclet ? doclet.longname : '<global>'),
                'doclet children',
