@@ -1,6 +1,6 @@
 {
-  "name": "jsdoc-sphinx",
-  "version": "0.0.6",
+  "name": "@domainesia/jsdoc-sphinx",
+  "version": "0.0.1",
   "description": "A JSDoc3 template which output ReStructured Text for Sphinx Doc",
   "main": "/template/publish.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:HumanBrainProject/jsdoc-sphinx.git"
+    "url": "git@github.com:domainesia/jsdoc-sphinx.git"
   },
   "keywords": [
     "jsdoc",
@@ -24,7 +24,7 @@
   "author": "Olivier Amblet <olivier.amblet@epfl.ch>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/HumanBrainProject/jsdoc-sphinx/issues"
+    "url": "https://github.com/domainesia/jsdoc-sphinx/issues"
   },
   "eslintConfig": {
     "root": true,
@@ -37,7 +37,7 @@
       "semi": 2
     }
   },
-  "homepage": "https://github.com/HumanBrainProject/jsdoc-sphinx",
+  "homepage": "https://github.com/domainesia/jsdoc-sphinx",
   "peerDependencies": {
     "jsdoc": "^3.3.3"
   },
