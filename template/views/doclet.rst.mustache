@@ -8,20 +8,11 @@
 Member Of :doc:`{{doclet.parentRstLink}}`
 {{/doclet.parentRstLink}}
 
+{{doclet.description}}
+
+
 .. contents:: Local Navigation
    :local:
-
-{{#h2}}Children{{/h2}}
-
-.. toctree::
-   :maxdepth: 1
-   {{#pre}}
-   {{> toctreeChildren }}
-   {{/pre}}
-
-{{#h2}}Description{{/h2}}
-
-{{doclet.description}}
 
 {{#function}}
 {{>func}}
@@ -47,3 +38,13 @@ Member Of :doc:`{{doclet.parentRstLink}}`
 {{#doclet.examples}}
 {{#example}}{{.}}{{/example}}
 {{/doclet.examples}}
+
+{{#h2}}Children{{/h2}}
+
+.. toctree::
+   :maxdepth: 1
+   {{#pre}}
+   {{> toctreeChildren }}
+   {{/pre}}
+
+fin.
