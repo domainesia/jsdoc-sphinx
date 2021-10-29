@@ -149,7 +149,7 @@ function registerLink(doclet) {
   }
   var parent;
   parent = helper.find(context.data, {longname: doclet.memberof});
-  if (parent && parent.length > 0) {
+  if (parent && parent.length > 0 && parent[0].longname != doclet.longname) {
     doclet.parentRstLink = parent[0].rstLink;
   }
   // Reference code

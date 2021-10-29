@@ -32,6 +32,9 @@ function docletChildren(context, doclet, kinds) {
       kind: k,
       memberof: doclet ? doclet.longname : {isUndefined: true}
     };
+    if (doclet) {
+      q.longname = { "!is": doclet.longname };
+    }
     results[k] = helper.find(context.data, q);
   });
   logger.debug((doclet ? doclet.longname : '<global>'),
