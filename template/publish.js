@@ -53,7 +53,8 @@ function publish(taffyData, options, tutorials) {
     (item) => {
       if (item.length > 1) {
         item.forEach((doclet) => {
-          if (doclet.meta.code.name.indexOf('exports.') !== 0) {
+          let codepartName = (doclet.meta.code && doclet.meta.code.name) || '';
+          if (codepartName.indexOf('exports.') !== 0) {
             doclet.scope = 'package';
             doclet.shadow = true;
           }
